@@ -1,0 +1,102 @@
+{
+  "MoviesSettings": {
+    "StateFilters": [
+      {
+        "Name": "Created",
+        "IsChecked": true
+      },
+      {
+        "Name": "InQueue",
+        "IsChecked": true
+      },
+      {
+        "Name": "Finished",
+        "IsChecked": true
+      },
+      {
+        "Name": "Reviewed",
+        "IsChecked": true
+      },
+      {
+        "Name": "Closed",
+        "IsChecked": true
+      },
+      {
+        "Name": "Archived",
+        "IsChecked": true
+      }
+    ],
+    "TypeFilters": [
+      {
+        "Name": "NA",
+        "IsChecked": true
+      },
+      {
+        "Name": "ForMe",
+        "IsChecked": true
+      },
+      {
+        "Name": "ForParent",
+        "IsChecked": true
+      },
+      {
+        "Name": "ForFamily",
+        "IsChecked": true
+      }
+    ],
+    "SelectedMovieID": 0
+  },
+  "SerialsSettings": {
+    "SelectedSerialID": 0
+  },
+  "GamesSettings": {
+    "StateFilters": [
+      {
+        "Name": "Created",
+        "IsChecked": true
+      },
+      {
+        "Name": "InQueue",
+        "IsChecked": true
+      },
+      {
+        "Name": "Started",
+        "IsChecked": true
+      },
+      {
+        "Name": "Paused",
+        "IsChecked": true
+      },
+      {
+        "Name": "Finished",
+        "IsChecked": true
+      },
+      {
+        "Name": "Archived",
+        "IsChecked": true
+      }
+    ],
+    "SelectedGameID": 0
+  },
+  "BooksSettings": {
+    "StateFilters": [
+      {
+        "Name": "Created",
+        "IsChecked": true
+      },
+      {
+        "Name": "Started",
+        "IsChecked": true
+      },
+      {
+        "Name": "Finished",
+        "IsChecked": true
+      },
+      {
+        "Name": "Archived",
+        "IsChecked": true
+      }
+    ],
+    "SelectedBookID": 0
+  }
+}
