@@ -41,8 +41,9 @@
       <HintPath>packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="KLib">
-      <HintPath>..\KLib.Net\KLib\bin\Debug\KLib.dll</HintPath>
+    <Reference Include="KLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\KLib.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.3.5, Culture=neutral, PublicKeyToken=c5935629d38af058, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.0.9.3.5\lib\net45\LiveCharts.dll</HintPath>
