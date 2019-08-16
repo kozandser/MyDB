@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"> 
+    
+    <SolidColorBrush x:Key="CreatedState_ColorBrush" Color="#95a5a6"/>
+    <SolidColorBrush x:Key="InQueueState_ColorBrush" Color="#e74c3c"/>
+    <SolidColorBrush x:Key="StartedState_ColorBrush" Color="#2ecc71"/>
+    <SolidColorBrush x:Key="PausedState_ColorBrush" Color="#f2ca27"/>
+    <SolidColorBrush x:Key="FinishedState_ColorBrush" Color="#3498db"/>
+    <SolidColorBrush x:Key="ReviewedState_ColorBrush" Color="#27ae60"/>
+    <SolidColorBrush x:Key="ClosedState_ColorBrush" Color="#9b59b6"/>
+    <SolidColorBrush x:Key="ArchivedState_ColorBrush" Color="#34495e"/>
+
+    <SolidColorBrush x:Key="TypeNA_ColorBrush" Color="#95a5a6"/>
+    <SolidColorBrush x:Key="TypeForMe_ColorBrush" Color="#e74c3c"/>
+    <SolidColorBrush x:Key="TypeForParent_ColorBrush" Color="#9b59b6"/>
+    <SolidColorBrush x:Key="TypeForFamily_ColorBrush" Color="#27ae60"/>
+    <SolidColorBrush x:Key="DefaultGray" Color="#FFF1EDED" />
+
+    <SolidColorBrush x:Key="Rating0_ColorBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="Rating1_ColorBrush" Color="#e74c3c" />
+    <SolidColorBrush x:Key="Rating2_ColorBrush" Color="#f1c40f" />
+    <SolidColorBrush x:Key="Rating3_ColorBrush" Color="#2ecc71" />
+
+
+
+
+
+
+
+
+    <SolidColorBrush x:Key="BlueAccentColorBrush" Color="#FF119EDA"/>
+    <SolidColorBrush x:Key="GreenAccentColorBrush" Color="#FF60A917"/>
+    <SolidColorBrush x:Key="YellowAccentColorBrush" Color="#FFFEDE06"/>
+    <SolidColorBrush x:Key="RedAccentColorBrush" Color="#FFE51400"/>
+    <SolidColorBrush x:Key="AmberAccentColorBrush" Color="#FFF0A30A"/>
+    <SolidColorBrush x:Key="LimeAccentColorBrush" Color="#FFA4C400"/>
+    <SolidColorBrush x:Key="OrangeAccentColorBrush" Color="#FFFA6800"/>
+    <SolidColorBrush x:Key="PurpleAccentColorBrush" Color="#FF6459DF"/>
+</ResourceDictionary>

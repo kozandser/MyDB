@@ -1,0 +1,40 @@
+﻿<Application x:Class="MyDB4.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"             
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             StartupUri="MainWindow.xaml"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <sys:Boolean x:Key="BoolTrue">True</sys:Boolean>
+            <sys:Boolean x:Key="BoolFalse">False</sys:Boolean>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml"/>
+                
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />-->
+
+                <ResourceDictionary Source="pack://application:,,,/KLib;component/Wpf/Styles/GridSplitterStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/KLib;component/Wpf/Colors.xaml" />
+
+                <ResourceDictionary Source="/Resources/Icons.xaml"/>
+                <ResourceDictionary Source="/Resources/Colors.xaml"/>
+                <ResourceDictionary Source="/Resources/IconEditorStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/GroupBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridColumns.xaml"/>
+                <ResourceDictionary Source="/Resources/Buttons.xaml"/>
+                <ResourceDictionary Source="/Resources/Icons2.xaml"/>
+                <ResourceDictionary Source="/Resources/DescriptionTextBox.xaml"/>
+                <ResourceDictionary Source="/Resources/ToolBar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,94 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:res="clr-namespace:MyDB4.Resources">
+    
+    <Style x:Key="MovieStateRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Fill" Value="{Binding Name, Converter={res:StateToBrushConverter}}"/>
+        <Setter Property="ToolTip" Value="{Binding Caption}"/>
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Uniform" Visual="{Binding Name, Converter={res:MovieStateToIconConverter}}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MovieStateRectangleStyle2" TargetType="Rectangle" BasedOn="{StaticResource MovieStateRectangleStyle}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Width" Value="15"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsDone}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SeasonStateRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Fill" Value="{Binding Name, Converter={res:StateToBrushConverter}}"/>
+        <Setter Property="ToolTip" Value="{Binding Caption}"/>
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Uniform" Visual="{Binding Name, Converter={res:SeasonStateToIconConverter}}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SeasonStateRectangleStyle2" TargetType="Rectangle" BasedOn="{StaticResource SeasonStateRectangleStyle}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Width" Value="15"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsDone}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="GameStateRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Fill" Value="{Binding Name, Converter={res:StateToBrushConverter}}"/>
+        <Setter Property="ToolTip" Value="{Binding Caption}"/>
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Uniform" Visual="{Binding Name, Converter={res:GameStateToIconConverter}}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="GameStateRectangleStyle2" TargetType="Rectangle" BasedOn="{StaticResource GameStateRectangleStyle}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Width" Value="15"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsDone}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BookStateRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Fill" Value="{Binding Name, Converter={res:StateToBrushConverter}}"/>
+        <Setter Property="ToolTip" Value="{Binding Caption}"/>
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Uniform" Visual="{Binding Name, Converter={res:BookStateToIconConverter}}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="BookStateRectangleStyle2" TargetType="Rectangle" BasedOn="{StaticResource BookStateRectangleStyle}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Width" Value="15"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsDone}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="NeedSaveRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Fill" Value="{StaticResource AlizarinBrush}"/>
+        <Setter Property="ToolTip" Value="Есть несохраненные изменения"/>
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Uniform" Visual="{StaticResource save_icon}" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding .}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

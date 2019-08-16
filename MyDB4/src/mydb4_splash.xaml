@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MyDB4.mydb4_splash"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDB4"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400"
+             UseLayoutRounding="True" SnapsToDevicePixels="True"
+             TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType"
+             Height="300" Width="400" FontSize="14"
+             >
+    <Grid Background="#2980b9">
+        <Grid Margin="10" Background="#3498db">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="64">
+                <Run Text="My" FontFamily="Segoe UI Light"/><Run Text="DB" FontFamily="Segoe UI"/><Run Text="4" FontFamily="Segoe UI" FontWeight="Bold"/>
+            </TextBlock>            
+        </Grid>
+        <TextBlock Text="4.1.0" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="8" Margin="0 0 10 0" Foreground="White"/>
+    </Grid>
+</UserControl>

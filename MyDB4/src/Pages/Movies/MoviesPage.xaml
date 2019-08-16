@@ -1,0 +1,323 @@
+﻿<UserControl x:Class="MyDB4.Pages.MoviesPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:viewmodel="clr-namespace:MyDB4.ViewModels"
+             xmlns:res="clr-namespace:MyDB4.Resources"
+             xmlns:model="clr-namespace:MyDB4.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:klib="clr-namespace:KLib;assembly=KLib"
+             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:MyDB4.Models"
+             d:DesignHeight="650" d:DesignWidth="1024"
+             FocusManager.FocusedElement="{Binding ElementName=dg}">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding StartTextSearchCommand}" Gesture="Ctrl+F"/>
+    </UserControl.InputBindings>
+    <Grid  Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" x:Name="LeftPanel"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="150" x:Name="RightPanel"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" Margin="0 0 0 0">
+            <StackPanel  IsEnabled="{Binding SelectedItem, Converter={klib:NullToBoolConverter}}">
+                <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource tag_icon}" ToolTip="Название">
+                    <TextBox Text="{Binding SelectedItem.RTitle}" />
+                </ContentControl>
+                <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource tag_outline_icon}" ToolTip="Оригинальное название">
+                    <TextBox Text="{Binding SelectedItem.OTitle}" />
+                </ContentControl>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource calendar_icon}" Grid.Column="0" ToolTip="Год">
+                        <ComboBox Text="{Binding SelectedItem.Year}"
+                                  ItemsSource="{Binding Years}"
+                                  IsEditable="True"/>
+                    </ContentControl>
+                    <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource accaunts_icon}" Grid.Column="1" ToolTip="Тип">
+                        <ComboBox SelectedValue="{Binding SelectedItem.Type}"
+                                  ItemsSource="{Binding Source={x:Static viewmodel:MovieViewModel.TypesDict}}"
+                                  SelectedValuePath="Key">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Value}" >
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="{Binding Path=Key, Converter={res:TypeToBrushConverter}}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsHighlighted, RelativeSource={RelativeSource AncestorType={x:Type ComboBoxItem}}}" Value="True">
+                                                        <Setter Property="Foreground" Value="{DynamicResource ItemTextSelected}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            
+                        </ComboBox>
+                    </ContentControl>
+                </Grid>
+                <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource web_icon}" ToolTip="Ссылка">
+                    <TextBox Text="{Binding SelectedItem.Link}" />
+                </ContentControl>
+                <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource kickstarter_icon}" ToolTip="ID Кинопоиска">
+                    <TextBox Text="{Binding SelectedItem.KinopoiskId}" />
+                </ContentControl>
+                <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource file_document_box_icon}" ToolTip="Описание">
+                    <TextBox Text="{Binding SelectedItem.Description}"
+                             TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                             AcceptsReturn="True">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBoxBase}}">
+                                <Setter Property="Height" Value="24" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsFocused" Value="true">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.300" To="200" Storyboard.TargetProperty="Height" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.300" To="24" Storyboard.TargetProperty="Height" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>                                
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </ContentControl>
+
+                <ContentControl Style="{StaticResource MovieStateEditorStyle}" IsEnabled="False" DataContext="{Binding Path=SelectedItem.States.Items[(model:StateEnum)Created]}" />
+                <ContentControl Style="{StaticResource MovieStateEditorStyle}" DataContext="{Binding Path=SelectedItem.States.Items[(model:StateEnum)InQueue]}"/>
+                <ContentControl Style="{StaticResource MovieStateEditorStyle}" DataContext="{Binding Path=SelectedItem.States.Items[(model:StateEnum)Finished]}"/>
+                <ContentControl Style="{StaticResource MovieStateEditorStyle}" DataContext="{Binding Path=SelectedItem.States.Items[(model:StateEnum)Reviewed]}"/>
+                <ContentControl Style="{StaticResource MovieStateEditorStyle}" DataContext="{Binding Path=SelectedItem.States.Items[(model:StateEnum)Closed]}"/>
+                <ContentControl Style="{StaticResource MovieStateEditorStyle}" DataContext="{Binding Path=SelectedItem.States.Items[(model:StateEnum)Archived]}"/>
+
+                <ContentControl Style="{StaticResource IconEditorStyle}" Tag="{StaticResource star_icon}" ToolTip="Оценка">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding SelectedItem.Rating.Value}" Grid.Column="0" VerticalAlignment="Center" Foreground="Black"/>
+                        <Slider Grid.Column="1"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency=".5"
+                            Value="{Binding SelectedItem.Rating.Value}"
+                            Orientation="Horizontal"
+                            Maximum="5"
+                            Minimum="0"/>
+                    </Grid>
+                </ContentControl>
+            </StackPanel>
+        </ScrollViewer>
+        <GridSplitter Style="{StaticResource ShadeGridSplitterStyle}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+        <DockPanel Grid.Column="2">
+            <ToolBarTray Style="{StaticResource ToolBarTrayStyle}" x:Name="toolbar">
+                <ToolBar>
+                    <!--<Button Style="{StaticResource IconFlatButtonStyle}"
+                        Tag="{StaticResource refresh_icon}"
+                        Command="{Binding RefreshCommand}"/>-->
+                    <Button Style="{StaticResource IconFlatButtonStyle}"
+                        Tag="{StaticResource plus_icon}"
+                        Command="{Binding AddCommand}"/>
+                    <Button Style="{StaticResource SaveButtonStyle}"
+                        Tag="{StaticResource save_icon}"
+                        Command="{Binding SaveCommand}"/>
+                    <Button Style="{StaticResource IconFlatButtonStyle}"
+                        Tag="{StaticResource history_icon}"
+                        Command="{Binding BackupCommand}"/>
+                    <Button Style="{StaticResource IconFlatButtonStyle}"
+                        Tag="{StaticResource star1_icon}"
+                        Command="{Binding SelectedItem.Rating.LoadRatingsCommand}"
+                        CommandParameter="{Binding SelectedItem.KinopoiskId}"/>
+                    <Button Style="{StaticResource IconFlatButtonStyle}"
+                        Tag="{StaticResource star_outline_icon}"
+                        Command="{Binding LoadRatingsCommand}"/>
+                </ToolBar>
+                <ToolBar>
+                    <TextBox Text="{Binding TextFilter.Text, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="tbFilter"
+                         DockPanel.Dock="Left" Width="200" VerticalAlignment="Center"/>
+                    <Button Style="{StaticResource IconFlatButtonStyle}"
+                        Tag="{StaticResource close_icon}"
+                        DockPanel.Dock="Left"                        
+                        Command="{Binding TextFilter.ResetFilterCommand}"/>
+                </ToolBar>
+                <ToolBar>
+                    <StatusBar Background="Transparent" DockPanel.Dock="Right" >
+                        <StatusBarItem Content="{Binding View.Count, Mode=OneWay}" FontWeight="Bold" ToolTip="Количество показанных"/>
+                        <Separator  Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                        <StatusBarItem Content="{Binding Items.Count, Mode=OneWay}"  ToolTip="Количество всего"/>
+                        <Separator  Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                        <StatusBarItem Content="{Binding LastSaveTime, Mode=OneWay}" ContentStringFormat="dd.MM.yyyy HH:mm"  ToolTip="Время сохранения"  FontWeight="Bold"/>
+                    </StatusBar>
+                </ToolBar>
+            </ToolBarTray>
+            <DataGrid x:Name="dg" 
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem}"
+                      klib:DataGridBehavior.FullRowSelect="True"
+                      klib:DataGridBehavior.ScrollToSelectedItem="True"
+                      klib:DataGridBehavior.SyncSortWithView="True"
+                      SelectionMode="Extended"
+                      RowHeight="60"
+                      HeadersVisibility="All"
+                      RowHeaderWidth="8">
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <Rectangle HorizontalAlignment="Stretch" Width="8" Margin="0"
+                                   Fill="{Binding DataContext.Type,
+                                        RelativeSource={RelativeSource AncestorType=DataGridRow},
+                                        Converter={res:TypeToBrushConverter}}"/>
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>                
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="C" Modifiers="Control" Command="{Binding SelectedItem.CopyInfoCommand}" CommandParameter="{Binding SelectedItem.RTitle}"/>
+                    <KeyBinding Key="V" Modifiers="Control" Command="{Binding AddNewFromClipboardCommand}" />
+                </DataGrid.InputBindings>
+                <DataGrid.ContextMenu>
+                    <ContextMenu x:Name="dgcm">
+                        <MenuItem Header="Удалить выделенные" Icon="{StaticResource close_icon}"
+                                  CommandParameter="{Binding Path=SelectedItems, ElementName=dg, Mode=OneWay}"
+                                  Command="{Binding MultiDeleteCommand}"/>
+                        <MenuItem Header="Закрыть выделенные" Icon="{StaticResource lock_icon}"
+                                  CommandParameter="{Binding Path=SelectedItems, ElementName=dg, Mode=OneWay}"
+                                  Command="{Binding MultiCloseCommand}"/>
+                        <MenuItem Header="В архив выделенные" Icon="{StaticResource archive_icon}"
+                                  CommandParameter="{Binding Path=SelectedItems, ElementName=dg, Mode=OneWay}"
+                                  Command="{Binding MultiArchiveCommand}"/>
+                        <Separator/>
+                        <MenuItem Header="Копировать название" Command="{Binding SelectedItem.CopyInfoCommand}" CommandParameter="{Binding SelectedItem.RTitle}" Icon="{StaticResource clipboard_icon}"/>
+                        <MenuItem Header="Копировать оригинальное название" Command="{Binding SelectedItem.CopyInfoCommand}" CommandParameter="{Binding SelectedItem.OTitle}" Icon="{StaticResource clipboard_outline_icon}"/>
+                        <MenuItem Header="Копировать полное название" Command="{Binding SelectedItem.CopyInfoCommand}" CommandParameter="{Binding SelectedItem.FullTitle}" Icon="{StaticResource clipboard_text_icon}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="ID" Width="50" SortMemberPath="ID">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock TextAlignment="Right"
+                                               Margin="5 5 5 0"
+                                               FontSize="16"
+                                               Text="{Binding ID}"
+                                               Style="{StaticResource DataGridTextBlockStyle_Gray}"/>
+                                    <TextBlock TextAlignment="Right"
+                                               Margin="5 0 5 5"
+                                               FontSize="10"
+                                               Text="{Binding KinopoiskId}"
+                                               Style="{StaticResource DataGridTextBlockStyle_Gray}"
+                                               Visibility="{Binding KinopoiskId, Converter={klib:NullToVisibilityConverter}}"/>
+                                </StackPanel>                                
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Название" Width="300" SortMemberPath="RTitle"
+                                            CellTemplate="{StaticResource Title_Column_Template}"/>
+                    <DataGridTemplateColumn Header="Год" Width="50" SortMemberPath="Year">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="5"
+                                       FontSize="16"
+                                       Text="{Binding Year}"
+                                       HorizontalAlignment="Right"
+                                       TextAlignment="Right"
+                                       Style="{DynamicResource DataGridTextBlockStyle_Black}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Статус" Width="65" SortMemberPath="States.LastState.Name">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Rectangle Width="25" Height="25"
+                                           VerticalAlignment="Center"
+                                           Margin="5"
+                                           ToolTip="{Binding Caption}"
+                                           Style="{StaticResource MovieStateRectangleStyle}"
+                                           DataContext="{Binding States.LastState}">
+                                </Rectangle>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Оценка"  Width="75" SortMemberPath="Rating.Value"
+                                            CellTemplate="{StaticResource Rating_Column_Template}"/>
+                    <DataGridTemplateColumn Header="КП"  Width="75" SortMemberPath="Rating.KinopoiskRating"
+                                            CellTemplate="{StaticResource KinopoiskRating_Column_Template}"/>
+                    <DataGridTemplateColumn Header="IMDB"  Width="75" SortMemberPath="Rating.IMDBRating"
+                                            CellTemplate="{StaticResource ImdbRating_Column_Template}"/>
+                    <DataGridTemplateColumn Header="Изм." Width="65" SortMemberPath="IsChanged"
+                                            CellTemplate="{StaticResource IsChanged_Column_Template}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        <GridSplitter Style="{StaticResource ShadeGridSplitterStyle}" Grid.Column="3" HorizontalAlignment="Stretch"/>
+        <StackPanel Grid.Column="4">
+            <GroupBox Header="Статус" Margin="5,0,5,5">                
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource IconFlatButtonStyle}"
+                                Tag="{StaticResource checkbox-multiple-marked-outline-icon}"
+                                DockPanel.Dock="Left"
+                                Command="{Binding StateFiltersCheckOnCommand}"/>
+                        <Button Style="{StaticResource IconFlatButtonStyle}"
+                                Tag="{StaticResource checkbox-multiple-blank-outline-icon}"
+                                DockPanel.Dock="Left"
+                                Command="{Binding StateFiltersCheckOffCommand}"/>
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding StateFilters}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Margin="5"
+                                          Content="{Binding Value.Caption}" IsChecked="{Binding Value.IsChecked}"
+                                          Foreground="{Binding Value.Name, Converter={res:StateToBrushConverter}}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Тип"  Margin="5,0,5,5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource IconFlatButtonStyle}"
+                                Tag="{StaticResource checkbox-multiple-marked-outline-icon}"
+                                DockPanel.Dock="Left"
+                                Command="{Binding TypeFiltersCheckOnCommand}"/>
+                        <Button Style="{StaticResource IconFlatButtonStyle}"
+                                Tag="{StaticResource checkbox-multiple-blank-outline-icon}"
+                                DockPanel.Dock="Left"
+                                Command="{Binding TypeFiltersCheckOffCommand}"/>
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding TypeFilters}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Margin="5"
+                                          Content="{Binding Value.Caption}" IsChecked="{Binding Value.IsChecked}"
+                                          Foreground="{Binding Value.Name, Converter={res:TypeToBrushConverter}}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+            </GroupBox>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

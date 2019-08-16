@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="MyDB4.Pages.SerialsStatsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.Resources>
+            <Style TargetType="Border" x:Key="BorderStyle">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource DataGridGridLines}"/>
+            </Style>
+        </Grid.Resources>
+        <DockPanel>
+            <!--<TextBlock Margin="10 2 0 2" FontSize="14" FontFamily="Segoe UI Light" DockPanel.Dock="Top">
+                    Всего фильмов: <Run Text="{Binding AllCount}"/>
+            </TextBlock>-->
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <Border Height="300" Style="{StaticResource BorderStyle}" DataContext="{Binding YearStatistics}">
+                        <DockPanel>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 2 0 2">
+                                <Button Style="{StaticResource IconFlatButtonStyle}"
+                                            Tag="{StaticResource redo_variant_icon}"
+                                            Command="{Binding ResetPeriodCommand}"/>
+                                <Button Style="{StaticResource IconFlatButtonStyle}"
+                                            Tag="{StaticResource chevron_left_icon}"
+                                            Command="{Binding PrevPeriodCommand}"/>
+                                <TextBlock Text="{Binding Year}" Margin="8 0 8 0" VerticalAlignment="Center" Width="50" TextAlignment="Center"/>
+                                <Button Style="{StaticResource IconFlatButtonStyle}"
+                                            Tag="{StaticResource chevron_right_icon}"
+                                            Command="{Binding NextPeriodCommand}"/>
+                                <Button Style="{StaticResource IconFlatButtonStyle}"
+                                            Tag="{StaticResource magnify_icon}"
+                                            Click="Button_Click"/>
+                                <CheckBox Content="Показывать приостановленные" Margin="4 0 0 0" IsChecked="{Binding ShowPaused}"/>
+                            </StackPanel>                            
+                            <lvc:CartesianChart Series="{Binding Series}" Zoom="X">
+                                <lvc:CartesianChart.DataTooltip>
+                                    <lvc:DefaultTooltip BulletSize="0"/>
+                                </lvc:CartesianChart.DataTooltip>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Время" x:Name="XAxis"
+                                              LabelFormatter="{Binding XFormatter}"                                              
+                                              MinValue="{Binding From}" 
+                                              MaxValue="{Binding To}">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="True" Step="{Binding Step}"></lvc:Separator>
+                                        </lvc:Axis.Separator>
+                                        <lvc:Axis.Sections>
+                                            <lvc:AxisSection Value="{Binding From}" StrokeThickness="0" Stroke="Gray" Label="Начало" SectionWidth="{Binding YearTicks}">
+                                                <lvc:AxisSection.Fill>
+                                                    <SolidColorBrush Color="#f2ca27" Opacity=".1"></SolidColorBrush>
+                                                </lvc:AxisSection.Fill>
+                                            </lvc:AxisSection>
+                                            <!--<lvc:AxisSection Value="{Binding To}" Label="Конец" StrokeThickness="1" Stroke="Gray" SectionWidth="100000000">
+                                                <lvc:AxisSection.Fill>
+                                                    <SolidColorBrush Color="#CDCDCD" Opacity=".4"></SolidColorBrush>
+                                                </lvc:AxisSection.Fill>
+                                            </lvc:AxisSection>-->                                            
+                                        </lvc:Axis.Sections>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="Сезон" Labels="{Binding Labels}"/>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </DockPanel>
+                        
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+
+    </Grid>
+</UserControl>
